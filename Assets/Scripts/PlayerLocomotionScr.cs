@@ -13,7 +13,7 @@ public class PlayerLocomotionScr : MonoBehaviour
         public LayerMask groundMask;
     }
 
-    [Tooltip("Add necessary objects")] public ToAdd locomotion;
+    [Tooltip("Add necessary Objects")] public ToAdd locomotion;
     [Space]
     public Movement movement;
 
@@ -40,8 +40,11 @@ public class PlayerLocomotionScr : MonoBehaviour
 
     void FixedUpdate()
     {
-        Movement();
-        Rotation();
+        if (!movement.isDead)
+        {
+            Movement();
+            Rotation();
+        }
     }
 
     private void Movement()
@@ -49,24 +52,21 @@ public class PlayerLocomotionScr : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
+        //Stamina
+        if (Input.GetKey(KeyCode.LeftShift) && movement.stamina.amount > 0 && !recoverAir)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && movement.stamina.amount > 0 && !recoverAir)
-            {
-                StopCoroutine(StaminaRecovery_());
-                speed = movement.runSpeed;
-                recoverStamina = false;
-                StartCoroutine(Sprint_());
-                sprint = true;
-            }
-            else
-            {
-                sprint = false;
-                speed = movement.walkSpeed;
-                StartCoroutine(StaminaRecovery_());
-            }
+            StopCoroutine(StaminaRecovery_());
+            speed = movement.runSpeed;
+            recoverStamina = false;
+            StartCoroutine(Sprint_());
+            sprint = true;
         }
-
+        else
+        {
+            StartCoroutine(StaminaRecovery_());
+            sprint = false;
+            speed = movement.walkSpeed;
+        }
 
         //Movement Forward & Sideways
         movement.moveDirecetion = transform.forward * vertical + transform.right * horizontal;
@@ -95,6 +95,8 @@ public class PlayerLocomotionScr : MonoBehaviour
         locomotion.playerCam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
+
+    #region - Coroutine -
 
     IEnumerator Sprint_()
     {
@@ -152,4 +154,6 @@ public class PlayerLocomotionScr : MonoBehaviour
 
         }
     }
+
+    #endregion
 }
