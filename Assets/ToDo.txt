@@ -1,0 +1,64 @@
+#########################################################
+#### Mechanics #########################################
+#########################################################
+
+	Character:	Can hold two Items at once
+				Eache Item in hand can be used/activated
+			
+				Walkie-Talkie
+				Walk - Run - "Sneak" - "Crouch"
+				Stamina System
+					Air Recovery (Couldown after reaching Stamina Amount 0)
+				Paranoia System
+					Paranormal activities lead to sanity lose
+					Light reduces sanity lose
+					Complette darkness leads to sanity lose
+					(Walkie-Talkie) Connection lose leads to minore sanity lose
+
+
+
+	Ghost:		Walk - Teleport - Idles - Kill
+				Modes
+					Passive - Present - Active - Aggressive - Hunting
+						Passive: None
+						Present: Lights flicker, ...
+						Active: Sound, Appearance Flicker, ...
+						Aggressive: Throws Objects around, Doors clamp, Appearance for few sec, Player charge into disapearance ...
+						Hunting: Appearance in middle range, disappearance in very low range (few sec later death of player), telportation
+				Navemesh
+					Door encounter ??
+				Turns of lights walking past them
+
+	Objects:	
+
+	Itemlist:	
+			
+
+
+#########################################################
+#### Controller #########################################
+#########################################################
+
+	Left Stick - Walk
+	Right Stick - Turn
+	R1 - (Maybe) Fast Swapp Right / (Maybe) Select for use
+	R2 - Run
+	L1 - (Maybe) Fast Swapp Left / (Maybe) Select for use
+	L2 - (Maybe) Sneak ???
+
+	//Buttons
+	Right Up - 
+	Right Down - Action
+	Right Left - Take Item
+	Right Right - ItemList
+
+	Left Up - 
+	Left Down -
+	Left Left -
+	Left Right -
+	
+	//Necessary
+	Action Button
+	Item Button Left
+	Item Button Right
+	(Either Item Button or extra Walkie Talkie Button)

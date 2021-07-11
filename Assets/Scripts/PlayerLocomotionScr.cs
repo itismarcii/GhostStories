@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerLocomotionScr : MonoBehaviour
 {
+    public Player player;
+
     [System.Serializable]
     public class ToAdd
     {
@@ -11,12 +13,13 @@ public class PlayerLocomotionScr : MonoBehaviour
         public Transform groundCheck;
         [HideInInspector] public CharacterController controller;
         public LayerMask groundMask;
+        public Transform[] hands;
+        public GameObject[] items;
     }
 
     [Tooltip("Add necessary Objects")] public ToAdd locomotion;
     [Space]
-    public Movement movement;
-
+    private Movement movement;
     Vector3 velocity;
     float speed;
     bool sprint = false;
@@ -32,10 +35,12 @@ public class PlayerLocomotionScr : MonoBehaviour
 
     void Start()
     {
+        movement = player.movement;
         locomotion.controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        maxStamina = movement.stamina.amount;
+        maxStamina = movement.stamina.maxAmount;
+        movement.stamina.amount = maxStamina;
     }
 
     void FixedUpdate()
@@ -44,6 +49,13 @@ public class PlayerLocomotionScr : MonoBehaviour
         {
             Movement();
             Rotation();
+
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                RaycastHit hit;
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                
+            }
         }
     }
 
@@ -95,6 +107,11 @@ public class PlayerLocomotionScr : MonoBehaviour
         locomotion.playerCam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
+
+    void GrabItem(GameObject item)
+    {
+
+    } 
 
     #region - Coroutine -
 
