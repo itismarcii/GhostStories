@@ -29,7 +29,27 @@
 					Door encounter ??
 				Turns of lights walking past them
 
-	Objects:	
+	Objects:	Lighter:		Activate:	Turn on Lighter
+								Deactivate: Turn off Lighter
+								Refileable:	True
+
+				Lighter Fuel:	Activate:	Lighter in hand <- Fuel Lighter
+								Deactivate:	-
+								Refilable:	False
+
+				Light Bulb:		Activate:	Puts Lighter Bulb into Position / Turns Lighter Bulb on
+								Deactivate: Turns Lighter Bulb of if it has a Position
+								Refilable:	False
+
+				Ghost Radio:	Activate:	Turns Sound on
+								Deactivate:	Turns Sound off
+								Refilable:	True -> Batteries
+
+				Batteries:		Activate:	Puts Batteries into other Hand object
+								Deactivate:	-
+								Refilable:	False
+
+
 
 	Itemlist:	
 			

@@ -5,11 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Items")]
 public class Item : ScriptableObject
 {
-    public string itemName;
-    public Item(string itemName)
+    public enum ItemUsage
     {
-        this.itemName = itemName;
+        Lighter,
+        LighterFuel,
+        LightBulb,
+        Radio,
+        Batterie,
+        QuestItem
     }
+
+    public ItemUsage itemName;
+
     public bool active = false;
     public bool lightSource;
     public bool refilable;
@@ -24,6 +31,8 @@ public class Item : ScriptableObject
         [Range(.01f, 20f)] public float refilableAmount;
         [Range(.01f, 20f)] public float loseTime;
         [Range(.01f, 20f)] public float loseAmount;
+
+        Item refileItem;
     }
     public Durability durability;
 }

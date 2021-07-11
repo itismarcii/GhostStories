@@ -40,7 +40,7 @@ public class PlayerLocomotionScr : MonoBehaviour
     float originalheight;
 
     //Item Parameter
-    [Range(1f, 10f)] public float grab_MaxRange = 10f;
+    [Range(.1f, 5f)] public float grabRange = 10f;
     GameObject leftItem;
     GameObject rightItem;
     bool isRightItem = false;
@@ -70,8 +70,8 @@ public class PlayerLocomotionScr : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                if(isRightItem) { DropItem(locomotion.rightHand, rightItem); }
-                else if(!isLeftItem) { DropItem(locomotion.leftHand, leftItem); }
+                if(isRightItem) { DropItem(locomotion.rightHand, rightItem); isRightItem = false;  }
+                else if(isLeftItem) { DropItem(locomotion.leftHand, leftItem); isLeftItem = false; }
                 
             }
         }
@@ -131,8 +131,6 @@ public class PlayerLocomotionScr : MonoBehaviour
         locomotion.controller.Move(movement.moveDirecetion * speed * Time.deltaTime);
 
         Gravity();
-
-        Debug.Log(speed);
     }
 
     void Gravity()
@@ -182,7 +180,8 @@ public class PlayerLocomotionScr : MonoBehaviour
     {
         RaycastHit hit;
         var ray = locomotion.playerCam.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, grab_MaxRange))
+
+        if (Physics.Raycast(ray, out hit, grabRange, 1 << 8))
         {
             var selection = hit.transform;
 
@@ -207,6 +206,7 @@ public class PlayerLocomotionScr : MonoBehaviour
             }
             //Else put into inventory
         }
+        
     }
 
     void DropItem(Transform parent,GameObject obj)
@@ -214,7 +214,16 @@ public class PlayerLocomotionScr : MonoBehaviour
         obj.transform.parent = null;
         obj.GetComponent<Rigidbody>().isKinematic = false;
         parent = null;
-        isRightItem = false;
+    }
+
+    void ActivateItem(GameObject item)
+    {
+        item.GetComponent<Item>().active = true;
+    }
+
+    void DeactivateItem(GameObject item)
+    {
+        item.GetComponent<Item>().active = false;
     }
 
     #endregion

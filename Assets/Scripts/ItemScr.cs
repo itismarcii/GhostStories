@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemScr : MonoBehaviour
 {
     public Item item;
+    LayerMask mask;
 
     bool refile = false;
     bool defile = false;
@@ -15,6 +16,7 @@ public class ItemScr : MonoBehaviour
 
     private void Start()
     {
+        mask.value = 8;
         max = item.durability.maxAmount;
         refileAmount = item.durability.refilableAmount;
         loseAmount = item.durability.loseAmount;
