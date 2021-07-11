@@ -9,16 +9,20 @@ public class PlayerLocomotionScr : MonoBehaviour
     [System.Serializable]
     public class ToAdd
     {
-        public Transform playerCam;
+        public Camera playerCam;
         public Transform groundCheck;
         [HideInInspector] public CharacterController controller;
         public LayerMask groundMask;
-        public Transform[] hands;
+        public Transform leftHand;
+        public Transform rightHand;
         public GameObject[] items;
+        [HideInInspector] public CapsuleCollider collider;
     }
 
     [Tooltip("Add necessary Objects")] public ToAdd locomotion;
     [Space]
+
+    //Movement Parameter
     private Movement movement;
     Vector3 velocity;
     float speed;
@@ -27,20 +31,50 @@ public class PlayerLocomotionScr : MonoBehaviour
     bool recoverAir = false;
     float maxStamina;
 
-
     float xRotation = 0f;
     bool isGrounded;
     float groundDistance = 0.4f;
+
+    //Crouching
+    bool isCrouching = false;
+    float originalheight;
+
+    //Item Parameter
+    [Range(1f, 10f)] public float grab_MaxRange = 10f;
+    GameObject leftItem;
+    GameObject rightItem;
+    bool isRightItem = false;
+    bool isLeftItem = false;
 
 
     void Start()
     {
         movement = player.movement;
         locomotion.controller = GetComponent<CharacterController>();
+        locomotion.collider = GetComponent<CapsuleCollider>();
+        originalheight = locomotion.collider.height;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         maxStamina = movement.stamina.maxAmount;
         movement.stamina.amount = maxStamina;
+    }
+
+    private void Update()
+    {
+        if (!movement.isDead)
+        {
+            //Prototype
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                GrabItem();
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if(isRightItem) { DropItem(locomotion.rightHand, rightItem); }
+                else if(!isLeftItem) { DropItem(locomotion.leftHand, leftItem); }
+                
+            }
+        }
     }
 
     void FixedUpdate()
@@ -49,42 +83,60 @@ public class PlayerLocomotionScr : MonoBehaviour
         {
             Movement();
             Rotation();
-
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKey(KeyCode.LeftControl))
             {
-                RaycastHit hit;
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                
+                Crouch();
+
             }
+            else
+            {
+                ReleaseCrouch();
+            }
+            
         }
     }
 
+
+    #region - Movement -
     private void Movement()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        //Stamina
-        if (Input.GetKey(KeyCode.LeftShift) && movement.stamina.amount > 0 && !recoverAir)
+        if (!isCrouching)
         {
-            StopCoroutine(StaminaRecovery_());
-            speed = movement.runSpeed;
-            recoverStamina = false;
-            StartCoroutine(Sprint_());
-            sprint = true;
+            //Stamina && Run
+            if (Input.GetKey(KeyCode.LeftShift) && movement.stamina.amount > 0 && !recoverAir)
+            {
+                StopCoroutine(StaminaRecovery_());
+                speed = movement.runSpeed;
+                recoverStamina = false;
+                StartCoroutine(Sprint_());
+                sprint = true;
+            }
+            else
+            {
+                StartCoroutine(StaminaRecovery_());
+                sprint = false;
+                speed = movement.walkSpeed;
+            }
         }
         else
         {
-            StartCoroutine(StaminaRecovery_());
-            sprint = false;
-            speed = movement.walkSpeed;
+            speed = movement.crouchSpeed;
         }
 
         //Movement Forward & Sideways
         movement.moveDirecetion = transform.forward * vertical + transform.right * horizontal;
         locomotion.controller.Move(movement.moveDirecetion * speed * Time.deltaTime);
 
-        //Gravity
+        Gravity();
+
+        Debug.Log(speed);
+    }
+
+    void Gravity()
+    {
         isGrounded = Physics.CheckSphere(locomotion.groundCheck.position, groundDistance, locomotion.groundMask);
         velocity.y += -movement.gravity * Time.deltaTime;
         if (isGrounded && velocity.y < 0)
@@ -108,10 +160,64 @@ public class PlayerLocomotionScr : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    void GrabItem(GameObject item)
+    void Crouch()
     {
+        locomotion.controller.height = movement.crouchHeight;
+        locomotion.collider.height = movement.crouchHeight;
+        isCrouching = true;
+    }
 
-    } 
+    void ReleaseCrouch()
+    {
+        locomotion.controller.height = originalheight;
+        locomotion.collider.height = originalheight;
+        isCrouching = false;
+    }
+
+    #endregion
+
+    #region - Item -
+
+    void GrabItem()
+    {
+        RaycastHit hit;
+        var ray = locomotion.playerCam.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray, out hit, grab_MaxRange))
+        {
+            var selection = hit.transform;
+
+            if (selection.transform.tag == "Item")
+            {
+                if (!isRightItem)
+                {
+                    rightItem = selection.gameObject;
+                    rightItem.transform.parent = locomotion.rightHand.parent;
+                    rightItem.GetComponent<Rigidbody>().isKinematic = true;
+                    rightItem.transform.position = locomotion.rightHand.transform.position;
+                    isRightItem = true;
+                }
+                else if (!isLeftItem)
+                {
+                    leftItem = selection.gameObject;
+                    leftItem.transform.parent = locomotion.leftHand.parent;
+                    leftItem.GetComponent<Rigidbody>().isKinematic = true;
+                    leftItem.transform.position = locomotion.leftHand.transform.position;
+                    isLeftItem = true;
+                }
+            }
+            //Else put into inventory
+        }
+    }
+
+    void DropItem(Transform parent,GameObject obj)
+    {
+        obj.transform.parent = null;
+        obj.GetComponent<Rigidbody>().isKinematic = false;
+        parent = null;
+        isRightItem = false;
+    }
+
+    #endregion
 
     #region - Coroutine -
 

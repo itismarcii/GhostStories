@@ -35,27 +35,29 @@
 			
 
 
-#########################################################
-#### Controller #########################################
-#########################################################
+####################################################		
+#### Input Controller ##############################		
+####################################################			#######################################################
+########## Controller ##############################			##################### Keyboard ########################
+####################################################			#######################################################
 
-	Left Stick - Walk
-	Right Stick - Turn
-	R1 - (Maybe) Fast Swapp Right / (Maybe) Select for use
+	Left Stick - Walk											
+	Right Stick - Turn											
+	R1 - Activate Right Item / Drop Right Item					
 	R2 - Run
-	L1 - (Maybe) Fast Swapp Left / (Maybe) Select for use
-	L2 - (Maybe) Sneak ???
+	L1 - Activate Left Item / Drop Left Item
+	L2 - Item Action
 
 	//Buttons
-	Right Up - 
+	Right Up - Fast Grab Walkie Talkie (Left Item Switch)
 	Right Down - Action
 	Right Left - Take Item
 	Right Right - ItemList
 
-	Left Up - 
-	Left Down -
-	Left Left -
-	Left Right -
+	Left Up - Switch with same Item in inventory up
+	Left Down - Switch with same Item in Inventory down
+	Left Left - Scroll Item Left
+	Left Right - Scroll Item Right
 	
 	//Necessary
 	Action Button

@@ -15,12 +15,14 @@ public class Movement
         [Range(.01f, 5f)] public float recoveryTime;
         [Range(.01f, 100f)] public float recoveryAmount;
         [Range(.01f, 20f)] public float catchBreathTime;
+
     }
 
     [Range(1f, 10f)] public float sneakSpeed;       //Not implemented && Maybe useless
     [Range(1f, 10f)] public float walkSpeed;
     [Range(1f, 15f)] public float runSpeed;
-    [Range(1f, 15f)] public float crouchSpeed;      //Not implemented 
+    [Range(1f, 15f)] public float crouchSpeed;
+    [Range(1f, 15f)] public float crouchHeight;
     [Range(1f, 20f)] public float turnSpeedX;
     [Range(1f, 20f)] public float turnSpeedY;
 

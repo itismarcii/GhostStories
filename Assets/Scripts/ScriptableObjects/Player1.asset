@@ -18,12 +18,13 @@ MonoBehaviour:
     sneakSpeed: 0
     walkSpeed: 3
     runSpeed: 4
-    crouchSpeed: 0
+    crouchSpeed: 2
+    crouchHeight: 1.5
     turnSpeedX: 8
     turnSpeedY: 5
     stamina:
       maxAmount: 100
-      amount: 100
+      amount: 35.5
       staminaLose: 2
       loseTime: 0.15
       recoveryTime: 0.2
@@ -31,6 +32,6 @@ MonoBehaviour:
       catchBreathTime: 7
     gravity: 9.81
     isDead: 0
-    moveDirecetion: {x: 0, y: 0, z: 0}
+    moveDirecetion: {x: 0, y: 0, z: -0}
   sanity: 0
   isHunted: 0

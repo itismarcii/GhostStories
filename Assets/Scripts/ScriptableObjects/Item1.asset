@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b977e56634f9154d8a0420c5685e1cc, type: 3}
   m_Name: Item1
   m_EditorClassIdentifier: 
-  itemName: 
-  lightSource: 0
-  refilable: 0
-  hasDurability: 0
+  itemName: Lighter
+  active: 0
+  lightSource: 1
+  refilable: 1
+  hasDurability: 1
   durability:
-    maxAmount: 0
+    maxAmount: 100
     amount: 0
-    refilableTime: 0
-    loseTime: 0
+    refilableTime: 1
+    refilableAmount: 1
+    loseTime: 1
+    loseAmount: 1
