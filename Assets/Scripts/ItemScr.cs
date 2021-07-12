@@ -7,63 +7,89 @@ public class ItemScr : MonoBehaviour
     public Item item;
     LayerMask mask;
 
-    bool refile = false;
-    bool defile = false;
+    bool refill = false;
+    bool isClear = false;
 
     float max;
-    float refileAmount;
+    float refillAmount;
     float loseAmount;
 
     private void Start()
     {
         mask.value = 8;
         max = item.durability.maxAmount;
-        refileAmount = item.durability.refilableAmount;
+        refillAmount = item.durability.refillableAmount;
         loseAmount = item.durability.loseAmount;
     }
 
     private void Update()
     {
-        if(item.active && !refile)
+        if(item.active && !refill && item.hasDurability)
         {
             StartCoroutine(LoseDurability_());
         }
     }
 
-    public void Refile()
+    public void ActivateItem(GameObject refile)
     {
-        if(item.hasDurability && !item.active)
+        StartCoroutine(Refill_(refile));
+    }
+
+    public void ActivateItem()
+    {
+        item.active = true;
+    }
+
+    public void Refile(GameObject obj)
+    {
+        if(item.hasDurability && !item.active && obj.GetComponent<Item>().itemName == item.refillableItem)
         {
-            StartCoroutine(Refile_());
+            StartCoroutine(Refill_(obj));
         }
     }
 
-    IEnumerator Refile_()
+    IEnumerator Refill_(GameObject obj)
     {
-        if(refile)
+        Item refillItem = obj.GetComponent<Item>();
+
+        if (refillItem.durability.amount >= refillItem.durability.maxAmount)
         {
-            yield break;
-        }
-        refile = true;
-        yield return new WaitForSeconds(item.durability.refilableTime);
-        refile = false;
-        item.durability.amount += refileAmount;
-        if(item.durability.amount > max)
-        {
-            item.durability.amount = max;
+            if (refill)
+            {
+                yield break;
+            }
+
+            refill = true;
+            yield return new WaitForSeconds(item.durability.refillableTime);
+            refill = false;
+
+       
+            item.durability.amount -= refillAmount;
+
+            if (item.durability.amount > 0)
+            {
+                refillItem.durability.amount += refillAmount;
+
+                if (refillItem.durability.amount > max)
+                {
+                    refillItem.durability.amount = max;
+                }
+            }
         }
     }
 
     IEnumerator LoseDurability_()
     {
-        if (defile)
+        if (isClear)
         {
             yield break;
         }
-        defile = true;
+
+        isClear = true;
         yield return new WaitForSeconds(item.durability.loseTime);
-        defile = false;
+        isClear = false;
         item.durability.amount -= loseAmount;
+
         if (item.durability.amount < 0)
         {
             item.durability.amount = 0;

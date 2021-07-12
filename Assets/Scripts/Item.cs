@@ -16,10 +16,11 @@ public class Item : ScriptableObject
     }
 
     public ItemUsage itemName;
+    public ItemUsage refillableItem;
 
     public bool active = false;
     public bool lightSource;
-    public bool refilable;
+    public bool refillable;
     public bool hasDurability;
 
     [System.Serializable]
@@ -27,8 +28,8 @@ public class Item : ScriptableObject
     {
         [Range(1, 100)] public int maxAmount;
         [Range(1f, 100f)] public float amount;
-        [Range(.01f, 20f)] public float refilableTime;
-        [Range(.01f, 20f)] public float refilableAmount;
+        [Range(.01f, 20f)] public float refillableTime;
+        [Range(.01f, 20f)] public float refillableAmount;
         [Range(.01f, 20f)] public float loseTime;
         [Range(.01f, 20f)] public float loseAmount;
 
