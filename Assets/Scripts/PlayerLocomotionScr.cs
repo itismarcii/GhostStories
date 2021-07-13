@@ -109,9 +109,13 @@ public class PlayerLocomotionScr : MonoBehaviour
             }
 
             //Switch Item
-            if(Input.GetKeyDown(KeyCode.Tab))
+            if(Input.GetKeyDown(KeyCode.F1))
             {
                 SwitchItem(locomotion.leftHand);
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                SwitchItem(locomotion.rightHand);
             }
         }
     }
@@ -270,15 +274,30 @@ public class PlayerLocomotionScr : MonoBehaviour
         item.GetComponent<Item>().active = false;
     }
 
-    void GenerateItem(GameObject prefab, Item item , Transform parent)
+    void GenerateItem(GameObject prefab, Item item, Transform parent)
     {
-        leftItem = Instantiate(prefab, parent);
-        leftItem.GetComponent<ItemScr>().item = item;
-        item_left = item;
-        leftItem.GetComponent<ItemScr>().usage = item.refillableItem;
-        leftItem.GetComponent<Rigidbody>().isKinematic = true;
-        inventory.AddInInventory(item);
-        leftItem.transform.position = locomotion.leftHand.transform.position;
+        if (parent == locomotion.leftHand)
+        {
+            Destroy(leftItem);
+            leftItem = Instantiate(prefab, parent);
+            leftItem.GetComponent<ItemScr>().item = item;
+            item_left = item;
+            leftItem.GetComponent<ItemScr>().usage = item.refillableItem;
+            leftItem.GetComponent<Rigidbody>().isKinematic = true;
+            inventory.AddInInventory(item);
+            leftItem.transform.position = parent.position;
+        }
+        else if(parent == locomotion.rightHand)
+        {
+            Destroy(rightItem);
+            rightItem = Instantiate(prefab, parent);
+            rightItem.GetComponent<ItemScr>().item = item;
+            item_right = item;
+            rightItem.GetComponent<ItemScr>().usage = item.refillableItem;
+            rightItem.GetComponent<Rigidbody>().isKinematic = true;
+            inventory.AddInInventory(item);
+            rightItem.transform.position = parent.position;
+        }
     }
 
     void SwitchItem(Transform hand)
@@ -301,7 +320,6 @@ public class PlayerLocomotionScr : MonoBehaviour
                             item = i;
                             inventory.RemoveFromInventory(i);
                             finished = true;
-                            Destroy(leftItem);
                             break;
                         }
                     }
