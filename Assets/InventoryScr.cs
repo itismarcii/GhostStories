@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class InventoryScr : MonoBehaviour
@@ -9,6 +10,16 @@ public class InventoryScr : MonoBehaviour
     public List<Item> inventory;            //Later HideInInspector
 
     public List<GameObject> prefabs;
+    private Object[] pref;
+
+    void Awake()
+    {
+        pref = Resources.LoadAll<GameObject>("Prefabs/Items");
+        foreach(GameObject obj in pref)
+        {
+            prefabs.Add(obj);
+        }
+    }
 
     public void AddInInventory(Item item)
     {

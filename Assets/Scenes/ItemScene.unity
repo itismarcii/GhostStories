@@ -277,9 +277,7 @@ MonoBehaviour:
   maxSize: 5
   position: 0
   inventory: []
-  prefabs:
-  - {fileID: 1872389873276625137, guid: e532fea7f736cad4e94ae921de073931, type: 3}
-  - {fileID: 7319710541432652311, guid: 512688cd7b87f2a45a39912bcf456fa8, type: 3}
+  prefabs: []
 --- !u!1 &643398897
 GameObject:
   m_ObjectHideFlags: 0
