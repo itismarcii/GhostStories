@@ -7,6 +7,7 @@ public class Item : ScriptableObject
 {
     public enum ItemUsage
     {
+        none,
         Lighter,
         LighterFuel,
         LightBulb,
@@ -15,7 +16,7 @@ public class Item : ScriptableObject
         QuestItem
     }
 
-    public ItemUsage itemName;
+    public ItemUsage item;
     public ItemUsage refillableItem;
 
     public bool active = false;
@@ -28,8 +29,7 @@ public class Item : ScriptableObject
     {
         [Range(1, 100)] public int maxAmount;
         [Range(1f, 100f)] public float amount;
-        [Range(.01f, 20f)] public float refillableTime;
-        [Range(.01f, 20f)] public float refillableAmount;
+
         [Range(.01f, 20f)] public float loseTime;
         [Range(.01f, 20f)] public float loseAmount;
 

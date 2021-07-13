@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b977e56634f9154d8a0420c5685e1cc, type: 3}
-  m_Name: Item4
+  m_Name: LightFuel1
   m_EditorClassIdentifier: 
-  itemName: 0
-  refillableItem: 0
+  item: 2
+  refillableItem: 1
   active: 0
   lightSource: 0
   refillable: 0
   hasDurability: 0
   durability:
-    maxAmount: 0
-    amount: 0
-    refillableTime: 0
-    refillableAmount: 0
-    loseTime: 0
-    loseAmount: 0
+    maxAmount: 100
+    amount: 100
+    loseTime: 0.1
+    loseAmount: 2

@@ -65,7 +65,7 @@ public class PlayerLocomotionScr : MonoBehaviour
     {
         if (!movement.isDead)
         {
-            //Prototype
+            //Grab && Drop Item
             if (Input.GetKeyDown(KeyCode.E))
             {
                 GrabItem();
@@ -75,6 +75,36 @@ public class PlayerLocomotionScr : MonoBehaviour
                 if(isRightItem) { DropItem(locomotion.rightHand, rightItem); isRightItem = false;  }
                 else if(isLeftItem) { DropItem(locomotion.leftHand, leftItem); isLeftItem = false; }
                 
+            }
+
+
+            //Activate Item
+            if (Input.GetKey(KeyCode.X) && rightItem)     //Right Item
+            {
+                if (rightItem.GetComponent<ItemScr>().item.refillableItem != Item.ItemUsage.none && leftItem)
+                {
+                    rightItem.GetComponent<ItemScr>().ActivateItem(leftItem.GetComponent<ItemScr>().item);
+                }
+                {
+                    rightItem.GetComponent<ItemScr>().ActivateItem();
+                }
+
+            }
+            else if (Input.GetKey(KeyCode.Y) && leftItem)     //Left Item
+            {
+                if (leftItem.GetComponent<ItemScr>().item.refillableItem != Item.ItemUsage.none && rightItem)
+                {
+                    leftItem.GetComponent<ItemScr>().ActivateItem(rightItem.GetComponent<ItemScr>().item);
+                }
+                {
+                    leftItem.GetComponent<ItemScr>().ActivateItem();
+                }
+            }
+            else
+            {
+                //Needs to be better
+                if (rightItem) { rightItem.GetComponent<ItemScr>().item.active = false; }
+                if (leftItem) { leftItem.GetComponent<ItemScr>().item.active = false; }
             }
         }
     }
@@ -94,7 +124,6 @@ public class PlayerLocomotionScr : MonoBehaviour
             {
                 ReleaseCrouch();
             }
-            
         }
     }
 
@@ -196,7 +225,7 @@ public class PlayerLocomotionScr : MonoBehaviour
                     if (!isRightItem)
                     {
                         rightItem = selection.gameObject;
-                        rightItem.transform.parent = locomotion.rightHand.parent;
+                        rightItem.transform.parent = locomotion.rightHand;
                         rightItem.GetComponent<Rigidbody>().isKinematic = true;
                         rightItem.transform.position = locomotion.rightHand.transform.position;
                         isRightItem = true;
@@ -204,7 +233,7 @@ public class PlayerLocomotionScr : MonoBehaviour
                     else if (!isLeftItem)
                     {
                         leftItem = selection.gameObject;
-                        leftItem.transform.parent = locomotion.leftHand.parent;
+                        leftItem.transform.parent = locomotion.leftHand;
                         leftItem.GetComponent<Rigidbody>().isKinematic = true;
                         leftItem.transform.position = locomotion.leftHand.transform.position;
                         isLeftItem = true;
@@ -225,11 +254,6 @@ public class PlayerLocomotionScr : MonoBehaviour
         obj.GetComponent<Rigidbody>().isKinematic = false;
         parent = null;
         inventory.RemoveFromInventory(obj.GetComponent<ItemScr>().item);
-    }
-
-    void ActivateItem(GameObject item)
-    {
-        item.GetComponent<Item>().active = true;
     }
 
     void DeactivateItem(GameObject item)

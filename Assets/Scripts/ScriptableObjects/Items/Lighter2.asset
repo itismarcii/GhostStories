@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b977e56634f9154d8a0420c5685e1cc, type: 3}
-  m_Name: Item1
+  m_Name: Lighter2
   m_EditorClassIdentifier: 
-  itemName: Lighter
+  item: 1
+  refillableItem: 0
   active: 0
   lightSource: 1
-  refilable: 1
+  refillable: 1
   hasDurability: 1
   durability:
     maxAmount: 100
     amount: 0
-    refilableTime: 1
-    refilableAmount: 1
-    loseTime: 1
+    loseTime: 0.1
     loseAmount: 1

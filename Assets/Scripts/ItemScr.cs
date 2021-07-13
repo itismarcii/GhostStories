@@ -10,15 +10,12 @@ public class ItemScr : MonoBehaviour
     bool refill = false;
     bool isClear = false;
 
-    float max;
-    float refillAmount;
     float loseAmount;
+
 
     private void Start()
     {
         mask.value = 8;
-        max = item.durability.maxAmount;
-        refillAmount = item.durability.refillableAmount;
         loseAmount = item.durability.loseAmount;
     }
 
@@ -28,54 +25,95 @@ public class ItemScr : MonoBehaviour
         {
             StartCoroutine(LoseDurability_());
         }
-    }
-
-    public void ActivateItem(GameObject refile)
-    {
-        StartCoroutine(Refill_(refile));
+        if(item.lightSource)
+        {
+            Light();
+        }
     }
 
     public void ActivateItem()
     {
-        item.active = true;
+        if (item.durability.amount > 0)
+        {
+            item.active = true;
+            switch (item.item)
+            {
+                case Item.ItemUsage.Lighter:
+                    break;
+                case Item.ItemUsage.LightBulb:
+                    break;
+                case Item.ItemUsage.Radio:
+                    break;
+            }
+        }
     }
 
-    public void Refile(GameObject obj)
+    public void ActivateItem(Item i)
     {
-        if(item.hasDurability && !item.active && obj.GetComponent<Item>().itemName == item.refillableItem)
+        if (item.durability.amount > 0)
         {
-            StartCoroutine(Refill_(obj));
+            switch (item.item)
+            {
+                case Item.ItemUsage.LighterFuel:
+                    if (i.item == item.refillableItem)
+                    {
+                        Refill(i);
+                    }
+                    break;
+                case Item.ItemUsage.LightBulb:
+                    break;
+                case Item.ItemUsage.Batterie:
+                    if (i.item == item.refillableItem)
+                    {
+                        Refill(i);
+                    }
+                    break;
+            }
+        }
+    }
+
+    #region - Actives -
+
+    void Light()
+    {
+        Debug.Log("glow");
+    }
+
+    public void Refill(Item i)
+    {
+        if (i.durability.amount < i.durability.maxAmount)
+        {
+            StartCoroutine(Refill_(i));
+        }
+        if(i.durability.amount > i.durability.maxAmount)
+        {
+            i.durability.amount = i.durability.maxAmount;
         }
     }
 
-    IEnumerator Refill_(GameObject obj)
+    #endregion
+
+    #region - Coroutines -
+
+    IEnumerator Refill_(Item i)
     {
-        Item refillItem = obj.GetComponent<Item>();
-
-        if (refillItem.durability.amount >= refillItem.durability.maxAmount)
+        if (refill)
         {
-            if (refill)
-            {
-                yield break;
-            }
-
-            refill = true;
-            yield return new WaitForSeconds(item.durability.refillableTime);
-            refill = false;
-
-       
-            item.durability.amount -= refillAmount;
-
-            if (item.durability.amount > 0)
-            {
-                refillItem.durability.amount += refillAmount;
-
-                if (refillItem.durability.amount > max)
-                {
-                    refillItem.durability.amount = max;
-                }
-            }
+            yield break;
         }
+        
+        refill = true;
+        yield return new WaitForSeconds(item.durability.loseTime);
+        refill = false;
+
+        i.durability.amount += item.durability.loseAmount;
+        item.durability.amount -= item.durability.loseAmount;
+
+        if (item.durability.amount < 0)
+        {
+            item.durability.amount = 0;
+        }
+        
     }
 
     IEnumerator LoseDurability_()
@@ -96,4 +134,8 @@ public class ItemScr : MonoBehaviour
             item.active = false;
         }
     }
+
+    #endregion
 }
+
+
