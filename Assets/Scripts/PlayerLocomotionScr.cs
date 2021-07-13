@@ -40,6 +40,7 @@ public class PlayerLocomotionScr : MonoBehaviour
     float originalheight;
 
     //Item Parameter
+    InventoryScr inventory;
     [Range(.1f, 5f)] public float grabRange = 10f;
     GameObject leftItem;
     GameObject rightItem;
@@ -49,6 +50,7 @@ public class PlayerLocomotionScr : MonoBehaviour
 
     void Start()
     {
+        inventory = GetComponent<InventoryScr>();
         movement = player.movement;
         locomotion.controller = GetComponent<CharacterController>();
         locomotion.collider = GetComponent<CapsuleCollider>();
@@ -187,24 +189,32 @@ public class PlayerLocomotionScr : MonoBehaviour
 
             if (selection.transform.tag == "Item")
             {
-                if (!isRightItem)
+                if (!inventory.InvenotryFull())
                 {
-                    rightItem = selection.gameObject;
-                    rightItem.transform.parent = locomotion.rightHand.parent;
-                    rightItem.GetComponent<Rigidbody>().isKinematic = true;
-                    rightItem.transform.position = locomotion.rightHand.transform.position;
-                    isRightItem = true;
-                }
-                else if (!isLeftItem)
-                {
-                    leftItem = selection.gameObject;
-                    leftItem.transform.parent = locomotion.leftHand.parent;
-                    leftItem.GetComponent<Rigidbody>().isKinematic = true;
-                    leftItem.transform.position = locomotion.leftHand.transform.position;
-                    isLeftItem = true;
+                    inventory.AddInInventory(selection.GetComponent<ItemScr>().item);
+
+                    if (!isRightItem)
+                    {
+                        rightItem = selection.gameObject;
+                        rightItem.transform.parent = locomotion.rightHand.parent;
+                        rightItem.GetComponent<Rigidbody>().isKinematic = true;
+                        rightItem.transform.position = locomotion.rightHand.transform.position;
+                        isRightItem = true;
+                    }
+                    else if (!isLeftItem)
+                    {
+                        leftItem = selection.gameObject;
+                        leftItem.transform.parent = locomotion.leftHand.parent;
+                        leftItem.GetComponent<Rigidbody>().isKinematic = true;
+                        leftItem.transform.position = locomotion.leftHand.transform.position;
+                        isLeftItem = true;
+                    }
+                    else
+                    {
+                        Destroy(selection.gameObject);
+                    }
                 }
             }
-            //Else put into inventory
         }
         
     }
@@ -214,6 +224,7 @@ public class PlayerLocomotionScr : MonoBehaviour
         obj.transform.parent = null;
         obj.GetComponent<Rigidbody>().isKinematic = false;
         parent = null;
+        inventory.RemoveFromInventory(obj.GetComponent<ItemScr>().item);
     }
 
     void ActivateItem(GameObject item)
