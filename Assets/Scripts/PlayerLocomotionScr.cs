@@ -43,7 +43,9 @@ public class PlayerLocomotionScr : MonoBehaviour
     InventoryScr inventory;
     [Range(.1f, 5f)] public float grabRange = 10f;
     GameObject leftItem;
+    Item item_left;
     GameObject rightItem;
+    Item item_right;
     bool isRightItem = false;
     bool isLeftItem = false;
 
@@ -77,7 +79,6 @@ public class PlayerLocomotionScr : MonoBehaviour
                 
             }
 
-
             //Activate Item
             if (Input.GetKey(KeyCode.X) && rightItem)     //Right Item
             {
@@ -105,6 +106,12 @@ public class PlayerLocomotionScr : MonoBehaviour
                 //Needs to be better
                 if (rightItem) { rightItem.GetComponent<ItemScr>().item.active = false; }
                 if (leftItem) { leftItem.GetComponent<ItemScr>().item.active = false; }
+            }
+
+            //Switch Item
+            if(Input.GetKeyDown(KeyCode.Tab))
+            {
+                SwitchItem(locomotion.leftHand);
             }
         }
     }
@@ -224,6 +231,7 @@ public class PlayerLocomotionScr : MonoBehaviour
 
                     if (!isRightItem)
                     {
+                        item_right = selection.GetComponent<ItemScr>().item;
                         rightItem = selection.gameObject;
                         rightItem.transform.parent = locomotion.rightHand;
                         rightItem.GetComponent<Rigidbody>().isKinematic = true;
@@ -232,6 +240,7 @@ public class PlayerLocomotionScr : MonoBehaviour
                     }
                     else if (!isLeftItem)
                     {
+                        item_left = selection.GetComponent<ItemScr>().item;
                         leftItem = selection.gameObject;
                         leftItem.transform.parent = locomotion.leftHand;
                         leftItem.GetComponent<Rigidbody>().isKinematic = true;
@@ -248,7 +257,7 @@ public class PlayerLocomotionScr : MonoBehaviour
         
     }
 
-    void DropItem(Transform parent,GameObject obj)
+    void DropItem(Transform parent, GameObject obj)
     {
         obj.transform.parent = null;
         obj.GetComponent<Rigidbody>().isKinematic = false;
@@ -259,6 +268,56 @@ public class PlayerLocomotionScr : MonoBehaviour
     void DeactivateItem(GameObject item)
     {
         item.GetComponent<Item>().active = false;
+    }
+
+    void GenerateItem(GameObject prefab, Item item , Transform parent)
+    {
+        leftItem = Instantiate(prefab, parent);
+        leftItem.GetComponent<ItemScr>().item = item;
+        item_left = item;
+        leftItem.GetComponent<ItemScr>().usage = item.refillableItem;
+        leftItem.GetComponent<Rigidbody>().isKinematic = true;
+        inventory.AddInInventory(item);
+        leftItem.transform.position = locomotion.leftHand.transform.position;
+    }
+
+    void SwitchItem(Transform hand)
+    {
+        if(inventory.inventory.Count > 2)
+        {
+            GameObject prefab = null;
+            Item item = null;
+            foreach(Item i in inventory.inventory)
+            {
+                if(i != item_left && i != item_right)
+                {
+                    bool finished = false;
+
+                    foreach(GameObject pre in inventory.prefabs) {
+                        
+                        if(i.item == pre.GetComponent<ItemScr>().usage)
+                        {
+                            prefab = pre;
+                            item = i;
+                            inventory.RemoveFromInventory(i);
+                            finished = true;
+                            Destroy(leftItem);
+                            break;
+                        }
+                    }
+                    if(finished){ break; }
+                }
+            }
+
+            GenerateItem(prefab, item, hand);
+
+        }
+        
+    }
+
+    void SwitchItemRight()
+    {
+
     }
 
     #endregion

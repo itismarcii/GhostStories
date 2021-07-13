@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemScr : MonoBehaviour
 {
     public Item item;
+    public Item.ItemUsage usage;
     LayerMask mask;
 
     bool refill = false;
@@ -52,22 +53,9 @@ public class ItemScr : MonoBehaviour
     {
         if (item.durability.amount > 0)
         {
-            switch (item.item)
+            if (i.item == item.refillableItem)
             {
-                case Item.ItemUsage.LighterFuel:
-                    if (i.item == item.refillableItem)
-                    {
-                        Refill(i);
-                    }
-                    break;
-                case Item.ItemUsage.LightBulb:
-                    break;
-                case Item.ItemUsage.Batterie:
-                    if (i.item == item.refillableItem)
-                    {
-                        Refill(i);
-                    }
-                    break;
+                Refill(i);
             }
         }
     }
@@ -76,7 +64,7 @@ public class ItemScr : MonoBehaviour
 
     void Light()
     {
-        Debug.Log("glow");
+        //Implementation
     }
 
     public void Refill(Item i)

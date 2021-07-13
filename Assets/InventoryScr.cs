@@ -8,6 +8,7 @@ public class InventoryScr : MonoBehaviour
     [HideInInspector] public int position;
     public List<Item> inventory;            //Later HideInInspector
 
+    public List<GameObject> prefabs;
 
     public void AddInInventory(Item item)
     {

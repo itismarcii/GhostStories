@@ -20,6 +20,6 @@ MonoBehaviour:
   hasDurability: 1
   durability:
     maxAmount: 100
-    amount: 0
-    loseTime: 0.1
+    amount: 100
+    loseTime: 1
     loseAmount: 1
