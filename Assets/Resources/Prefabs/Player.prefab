@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 5592221375652631027}
   - component: {fileID: 5592221375652631026}
   - component: {fileID: 5592221375652631029}
+  - component: {fileID: 1598227339907850129}
   - component: {fileID: 5592221374244589969}
   m_Layer: 0
   m_Name: Player
@@ -228,7 +229,43 @@ MonoBehaviour:
     rightHand: {fileID: 5592221375366716940}
     items: []
     collider: {fileID: 0}
-  grabRange: 1.65
+  movement:
+    sneakSpeed: 0
+    walkSpeed: 0
+    runSpeed: 0
+    crouchSpeed: 0
+    crouchHeight: 0
+    turnSpeedX: 0
+    turnSpeedY: 0
+    stamina:
+      maxAmount: 0
+      amount: 0
+      staminaLose: 0
+      loseTime: 0
+      recoveryTime: 0
+      recoveryAmount: 0
+      catchBreathTime: 0
+    gravity: 9.81
+    isDead: 0
+    moveDirecetion: {x: 0, y: 0, z: 0}
+  isSprint: 0
+  actionRange: 10
+  leftItem: {fileID: 0}
+  rightItem: {fileID: 0}
+  isRightItem: 0
+  isLeftItem: 0
+--- !u!114 &1598227339907850129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592221375652631028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87708080ff9cf4348bf0fc8739f953fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5592221374244589969
 MonoBehaviour:
   m_ObjectHideFlags: 0

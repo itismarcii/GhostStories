@@ -100,7 +100,6 @@ public class ItemScr : MonoBehaviour
         {
             item.durability.amount = 0;
         }
-        
     }
 
     IEnumerator LoseDurability_()

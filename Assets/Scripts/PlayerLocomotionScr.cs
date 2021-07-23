@@ -22,9 +22,10 @@ public class PlayerLocomotionScr : MonoBehaviour
     [Space]
 
     //Movement Parameter
-    private Movement movement;
+    [HideInInspector] public Movement movement;
     Vector3 velocity;
     float speed;
+    [HideInInspector] public bool isSprint = false;
     bool sprint = false;
     bool recoverStamina = false;
     bool recoverAir = false;
@@ -40,13 +41,13 @@ public class PlayerLocomotionScr : MonoBehaviour
 
     //Item Parameter
     InventoryScr inventory;
-    [Range(.1f, 5f)] public float grabRange = 10f;
-    GameObject leftItem;
+    [Range(.1f, 5f)] public float actionRange = 10f;
+    [HideInInspector] public GameObject leftItem;
     Item item_left;
-    GameObject rightItem;
+    [HideInInspector] public GameObject rightItem;
     Item item_right;
-    bool isRightItem = false;
-    bool isLeftItem = false;
+    [HideInInspector] public bool isRightItem = false;
+    [HideInInspector] public bool isLeftItem = false;
 
 
     void Start()
@@ -56,98 +57,20 @@ public class PlayerLocomotionScr : MonoBehaviour
         locomotion.controller = GetComponent<CharacterController>();
         locomotion.collider = GetComponent<CapsuleCollider>();
         originalheight = locomotion.collider.height;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         maxStamina = movement.stamina.maxAmount;
         movement.stamina.amount = maxStamina;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
     }
-
-    private void Update()
-    {
-        if (!movement.isDead)
-        {
-            //Grab && Drop Item
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                GrabItem();
-            }
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                if(isRightItem) { DropItem(locomotion.rightHand, rightItem); isRightItem = false;  }
-                else if(isLeftItem) { DropItem(locomotion.leftHand, leftItem); isLeftItem = false; }
-                
-            }
-
-            //Activate Item
-            if (Input.GetKey(KeyCode.X) && rightItem)     //Right Item
-            {
-                if (rightItem.GetComponent<ItemScr>().item.refillableItem != Item.ItemUsage.none && leftItem)
-                {
-                    rightItem.GetComponent<ItemScr>().ActivateItem(leftItem.GetComponent<ItemScr>().item);
-                }
-                {
-                    rightItem.GetComponent<ItemScr>().ActivateItem();
-                }
-
-            }
-            else if (Input.GetKey(KeyCode.Y) && leftItem)     //Left Item
-            {
-                if (leftItem.GetComponent<ItemScr>().item.refillableItem != Item.ItemUsage.none && rightItem)
-                {
-                    leftItem.GetComponent<ItemScr>().ActivateItem(rightItem.GetComponent<ItemScr>().item);
-                }
-                {
-                    leftItem.GetComponent<ItemScr>().ActivateItem();
-                }
-            }
-            else
-            {
-                //Needs to be better
-                if (rightItem) { rightItem.GetComponent<ItemScr>().item.active = false; }
-                if (leftItem) { leftItem.GetComponent<ItemScr>().item.active = false; }
-            }
-
-            //Switch Item
-            if(Input.GetKeyDown(KeyCode.F1))
-            {
-                SwitchItem(locomotion.leftHand);
-            }
-            if (Input.GetKeyDown(KeyCode.F2))
-            {
-                SwitchItem(locomotion.rightHand);
-            }
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (!movement.isDead)
-        {
-            Movement();
-            Rotation();
-            if(Input.GetKey(KeyCode.LeftControl))
-            {
-                Crouch();
-
-            }
-            else
-            {
-                ReleaseCrouch();
-            }
-        }
-    }
-
 
     #region - Movement -
-    private void Movement()
+    public void Movement(float horizontal, float vertical)
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
         if (!isCrouching)
         {
             //Stamina && Run
-            if (Input.GetKey(KeyCode.LeftShift) && movement.stamina.amount > 0 && !recoverAir)
+            if (isSprint && movement.stamina.amount > 0 && !recoverAir)
             {
                 StopCoroutine(StaminaRecovery_());
                 speed = movement.runSpeed;
@@ -187,26 +110,24 @@ public class PlayerLocomotionScr : MonoBehaviour
         locomotion.controller.Move(velocity * Time.deltaTime);
     }
 
-    void Rotation()
+    public void Rotation(float horizontal, float vertical)
     {
-        float mouseX = Input.GetAxis("Mouse X") * movement.turnSpeedX * 10 * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * movement.turnSpeedY * 10 * Time.deltaTime;
 
-        xRotation -= mouseY;
+        xRotation -= horizontal;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         locomotion.playerCam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+        transform.Rotate(Vector3.up * vertical);
     }
 
-    void Crouch()
+    public void Crouch()
     {
         locomotion.controller.height = movement.crouchHeight;
         locomotion.collider.height = movement.crouchHeight;
         isCrouching = true;
     }
 
-    void ReleaseCrouch()
+    public void ReleaseCrouch()
     {
         locomotion.controller.height = originalheight;
         locomotion.collider.height = originalheight;
@@ -217,50 +138,39 @@ public class PlayerLocomotionScr : MonoBehaviour
 
     #region - Item -
 
-    void GrabItem()
+    public void GrabItem(Transform selection)
     {
-        RaycastHit hit;
-        var ray = locomotion.playerCam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, grabRange, 1 << 8))
+        if (!inventory.InvenotryFull())
         {
-            var selection = hit.transform;
+            inventory.AddInInventory(selection.GetComponent<ItemScr>().item);
 
-            if (selection.transform.tag == "Item")
+            if (!isRightItem)
             {
-                if (!inventory.InvenotryFull())
-                {
-                    inventory.AddInInventory(selection.GetComponent<ItemScr>().item);
-
-                    if (!isRightItem)
-                    {
-                        item_right = selection.GetComponent<ItemScr>().item;
-                        rightItem = selection.gameObject;
-                        rightItem.transform.parent = locomotion.rightHand;
-                        rightItem.GetComponent<Rigidbody>().isKinematic = true;
-                        rightItem.transform.position = locomotion.rightHand.transform.position;
-                        isRightItem = true;
-                    }
-                    else if (!isLeftItem)
-                    {
-                        item_left = selection.GetComponent<ItemScr>().item;
-                        leftItem = selection.gameObject;
-                        leftItem.transform.parent = locomotion.leftHand;
-                        leftItem.GetComponent<Rigidbody>().isKinematic = true;
-                        leftItem.transform.position = locomotion.leftHand.transform.position;
-                        isLeftItem = true;
-                    }
-                    else
-                    {
-                        Destroy(selection.gameObject);
-                    }
-                }
+                item_right = selection.GetComponent<ItemScr>().item;
+                rightItem = selection.gameObject;
+                rightItem.transform.parent = locomotion.rightHand;
+                rightItem.GetComponent<Rigidbody>().isKinematic = true;
+                rightItem.transform.position = locomotion.rightHand.transform.position;
+                isRightItem = true;
+            }
+            else if (!isLeftItem)
+            {
+                item_left = selection.GetComponent<ItemScr>().item;
+                leftItem = selection.gameObject;
+                leftItem.transform.parent = locomotion.leftHand;
+                leftItem.GetComponent<Rigidbody>().isKinematic = true;
+                leftItem.transform.position = locomotion.leftHand.transform.position;
+                isLeftItem = true;
+            }
+            else
+            {
+                Destroy(selection.gameObject);
             }
         }
-        
     }
 
-    void DropItem(Transform parent, GameObject obj)
+    public void DropItem(Transform parent, GameObject obj)
     {
         obj.transform.parent = null;
         obj.GetComponent<Rigidbody>().isKinematic = false;
@@ -268,9 +178,9 @@ public class PlayerLocomotionScr : MonoBehaviour
         inventory.RemoveFromInventory(obj.GetComponent<ItemScr>().item);
     }
 
-    void DeactivateItem(GameObject item)
+    public void DeactivateItem(GameObject item)
     {
-        item.GetComponent<Item>().active = false;
+        item.GetComponent<ItemScr>().item.active = false;
     }
 
     void GenerateItem(GameObject prefab, Item item, Transform parent)
@@ -299,7 +209,7 @@ public class PlayerLocomotionScr : MonoBehaviour
         }
     }
 
-    void SwitchItem(Transform hand)
+    public void SwitchItem(Transform hand)
     {
         if(inventory.inventory.Count > 2)
         {
@@ -330,11 +240,6 @@ public class PlayerLocomotionScr : MonoBehaviour
 
         }
         
-    }
-
-    void SwitchItemRight()
-    {
-
     }
 
     #endregion

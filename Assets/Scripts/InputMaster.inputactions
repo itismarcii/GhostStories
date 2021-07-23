@@ -14,9 +14,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Turn",
+                    "name": "Rotate",
                     "type": "PassThrough",
-                    "id": "8439aaa6-e816-434e-93c0-5ee44b455b74",
+                    "id": "2ff0943e-2860-4f02-8303-0a0f752ab241",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "OpenDoor",
+                    "name": "Crouch",
                     "type": "Button",
                     "id": "be6b8ca2-993d-4b3b-b571-558c70f93df3",
                     "expectedControlType": "Button",
@@ -92,6 +92,38 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "DropItemLeft",
+                    "type": "Button",
+                    "id": "e0fe5ce4-f2ad-4520-940f-68de3de3f174",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "DropItemRight",
+                    "type": "Button",
+                    "id": "449a88f5-2a08-499c-9813-a5d8ffbcaa90",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SwitchItemLeft",
+                    "type": "Button",
+                    "id": "0f1f1277-45b1-4db3-856c-bedba04ef589",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SwitchItemRight",
+                    "type": "Button",
+                    "id": "20bd791a-a4dd-4c32-aa40-7857c752b2d2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -119,28 +151,6 @@
                 },
                 {
                     "name": "",
-                    "id": "03bfa76f-7bb8-4241-b89e-642740843f55",
-                    "path": "<DualShockGamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "efdf9d86-214e-4ae5-96fd-8c6c2b1fdfd4",
-                    "path": "<XInputController>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "50c3c3a5-94a1-4195-a700-c87346685e9b",
                     "path": "<DualShockGamepad>/rightShoulder",
                     "interactions": "",
@@ -152,7 +162,7 @@
                 },
                 {
                     "name": "",
-                    "id": "6486ca0d-b511-4d54-93f6-f274e5a47ffd",
+                    "id": "95020832-2fe7-4a83-b274-b3740e2055b8",
                     "path": "<XInputController>/rightShoulder",
                     "interactions": "",
                     "processors": "",
@@ -163,7 +173,7 @@
                 },
                 {
                     "name": "",
-                    "id": "8f3d2afc-9573-46d8-9a1b-d482c17e1fe9",
+                    "id": "557f5a17-7b6d-4861-9f49-baeade9eede1",
                     "path": "<DualShockGamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
@@ -174,7 +184,7 @@
                 },
                 {
                     "name": "",
-                    "id": "557f5a17-7b6d-4861-9f49-baeade9eede1",
+                    "id": "1b1dae5b-6d2b-4b0a-9c2a-e9ddedc65172",
                     "path": "<XInputController>/leftShoulder",
                     "interactions": "",
                     "processors": "",
@@ -212,7 +222,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "OpenDoor",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -223,7 +233,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "OpenDoor",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -334,6 +344,116 @@
                     "processors": "",
                     "groups": "",
                     "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfe6d0a1-06f3-41c4-83c6-47f3051e89b7",
+                    "path": "<DualShockGamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropItemLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3092fc0b-defe-434d-9555-6c48faf658b6",
+                    "path": "<XInputController>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropItemLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f21e198-37b8-400c-b7d7-0e4e004eb6e0",
+                    "path": "<DualShockGamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropItemRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2781d2b6-7d59-438e-bb98-37e53bfb6fde",
+                    "path": "<XInputController>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropItemRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f847247a-7484-44af-84cb-88d5b1f266b6",
+                    "path": "<DualShockGamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchItemLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3fa82a0-37a5-42ca-a7e8-2ebad0878294",
+                    "path": "<XInputController>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchItemLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc53c765-dad0-44cc-9bb8-8a8fb5637b45",
+                    "path": "<DualShockGamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchItemRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5be4a116-d27d-4465-93bf-59e7699305a1",
+                    "path": "<XInputController>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchItemRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f43108f5-6a00-491f-a22b-313d8429c27b",
+                    "path": "<DualShockGamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc9cdaee-90b0-4ce0-91b9-3b9ffc36a1b8",
+                    "path": "<XInputController>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

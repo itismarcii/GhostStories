@@ -27,9 +27,9 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Turn"",
+                    ""name"": ""Rotate"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""8439aaa6-e816-434e-93c0-5ee44b455b74"",
+                    ""id"": ""2ff0943e-2860-4f02-8303-0a0f752ab241"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -59,7 +59,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""OpenDoor"",
+                    ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""be6b8ca2-993d-4b3b-b571-558c70f93df3"",
                     ""expectedControlType"": ""Button"",
@@ -105,6 +105,38 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DropItemLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0fe5ce4-f2ad-4520-940f-68de3de3f174"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DropItemRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""449a88f5-2a08-499c-9813-a5d8ffbcaa90"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwitchItemLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f1f1277-45b1-4db3-856c-bedba04ef589"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwitchItemRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""20bd791a-a4dd-4c32-aa40-7857c752b2d2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -132,28 +164,6 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""03bfa76f-7bb8-4241-b89e-642740843f55"",
-                    ""path"": ""<DualShockGamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""efdf9d86-214e-4ae5-96fd-8c6c2b1fdfd4"",
-                    ""path"": ""<XInputController>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""50c3c3a5-94a1-4195-a700-c87346685e9b"",
                     ""path"": ""<DualShockGamepad>/rightShoulder"",
                     ""interactions"": """",
@@ -165,7 +175,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6486ca0d-b511-4d54-93f6-f274e5a47ffd"",
+                    ""id"": ""95020832-2fe7-4a83-b274-b3740e2055b8"",
                     ""path"": ""<XInputController>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -176,7 +186,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8f3d2afc-9573-46d8-9a1b-d482c17e1fe9"",
+                    ""id"": ""557f5a17-7b6d-4861-9f49-baeade9eede1"",
                     ""path"": ""<DualShockGamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -187,7 +197,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""557f5a17-7b6d-4861-9f49-baeade9eede1"",
+                    ""id"": ""1b1dae5b-6d2b-4b0a-9c2a-e9ddedc65172"",
                     ""path"": ""<XInputController>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -225,7 +235,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""OpenDoor"",
+                    ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -236,7 +246,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""OpenDoor"",
+                    ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -349,6 +359,116 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfe6d0a1-06f3-41c4-83c6-47f3051e89b7"",
+                    ""path"": ""<DualShockGamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItemLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3092fc0b-defe-434d-9555-6c48faf658b6"",
+                    ""path"": ""<XInputController>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItemLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f21e198-37b8-400c-b7d7-0e4e004eb6e0"",
+                    ""path"": ""<DualShockGamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItemRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2781d2b6-7d59-438e-bb98-37e53bfb6fde"",
+                    ""path"": ""<XInputController>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItemRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f847247a-7484-44af-84cb-88d5b1f266b6"",
+                    ""path"": ""<DualShockGamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchItemLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3fa82a0-37a5-42ca-a7e8-2ebad0878294"",
+                    ""path"": ""<XInputController>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchItemLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc53c765-dad0-44cc-9bb8-8a8fb5637b45"",
+                    ""path"": ""<DualShockGamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchItemRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5be4a116-d27d-4465-93bf-59e7699305a1"",
+                    ""path"": ""<XInputController>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchItemRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f43108f5-6a00-491f-a22b-313d8429c27b"",
+                    ""path"": ""<DualShockGamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc9cdaee-90b0-4ce0-91b9-3b9ffc36a1b8"",
+                    ""path"": ""<XInputController>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -385,16 +505,20 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Walk = m_Player.FindAction("Walk", throwIfNotFound: true);
-        m_Player_Turn = m_Player.FindAction("Turn", throwIfNotFound: true);
+        m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_ActivateRightItem = m_Player.FindAction("ActivateRightItem", throwIfNotFound: true);
         m_Player_ActivateLeftItem = m_Player.FindAction("ActivateLeftItem", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
-        m_Player_OpenDoor = m_Player.FindAction("OpenDoor", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_FastGrabWaTa = m_Player.FindAction("FastGrabWaTa", throwIfNotFound: true);
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         m_Player_TakeItem = m_Player.FindAction("TakeItem", throwIfNotFound: true);
         m_Player_ItemList = m_Player.FindAction("ItemList", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_DropItemLeft = m_Player.FindAction("DropItemLeft", throwIfNotFound: true);
+        m_Player_DropItemRight = m_Player.FindAction("DropItemRight", throwIfNotFound: true);
+        m_Player_SwitchItemLeft = m_Player.FindAction("SwitchItemLeft", throwIfNotFound: true);
+        m_Player_SwitchItemRight = m_Player.FindAction("SwitchItemRight", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -448,31 +572,39 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Walk;
-    private readonly InputAction m_Player_Turn;
+    private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_ActivateRightItem;
     private readonly InputAction m_Player_ActivateLeftItem;
     private readonly InputAction m_Player_Run;
-    private readonly InputAction m_Player_OpenDoor;
+    private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_FastGrabWaTa;
     private readonly InputAction m_Player_Action;
     private readonly InputAction m_Player_TakeItem;
     private readonly InputAction m_Player_ItemList;
     private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_DropItemLeft;
+    private readonly InputAction m_Player_DropItemRight;
+    private readonly InputAction m_Player_SwitchItemLeft;
+    private readonly InputAction m_Player_SwitchItemRight;
     public struct PlayerActions
     {
         private @PlayerControlls m_Wrapper;
         public PlayerActions(@PlayerControlls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Walk => m_Wrapper.m_Player_Walk;
-        public InputAction @Turn => m_Wrapper.m_Player_Turn;
+        public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @ActivateRightItem => m_Wrapper.m_Player_ActivateRightItem;
         public InputAction @ActivateLeftItem => m_Wrapper.m_Player_ActivateLeftItem;
         public InputAction @Run => m_Wrapper.m_Player_Run;
-        public InputAction @OpenDoor => m_Wrapper.m_Player_OpenDoor;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @FastGrabWaTa => m_Wrapper.m_Player_FastGrabWaTa;
         public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputAction @TakeItem => m_Wrapper.m_Player_TakeItem;
         public InputAction @ItemList => m_Wrapper.m_Player_ItemList;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @DropItemLeft => m_Wrapper.m_Player_DropItemLeft;
+        public InputAction @DropItemRight => m_Wrapper.m_Player_DropItemRight;
+        public InputAction @SwitchItemLeft => m_Wrapper.m_Player_SwitchItemLeft;
+        public InputAction @SwitchItemRight => m_Wrapper.m_Player_SwitchItemRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -485,9 +617,9 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @Walk.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
                 @Walk.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
                 @Walk.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
-                @Turn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurn;
-                @Turn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurn;
-                @Turn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurn;
+                @Rotate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
                 @ActivateRightItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivateRightItem;
                 @ActivateRightItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivateRightItem;
                 @ActivateRightItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivateRightItem;
@@ -497,9 +629,9 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @Run.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
-                @OpenDoor.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenDoor;
-                @OpenDoor.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenDoor;
-                @OpenDoor.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenDoor;
+                @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @FastGrabWaTa.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastGrabWaTa;
                 @FastGrabWaTa.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastGrabWaTa;
                 @FastGrabWaTa.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastGrabWaTa;
@@ -515,6 +647,18 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @DropItemLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItemLeft;
+                @DropItemLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItemLeft;
+                @DropItemLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItemLeft;
+                @DropItemRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItemRight;
+                @DropItemRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItemRight;
+                @DropItemRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItemRight;
+                @SwitchItemLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItemLeft;
+                @SwitchItemLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItemLeft;
+                @SwitchItemLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItemLeft;
+                @SwitchItemRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItemRight;
+                @SwitchItemRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItemRight;
+                @SwitchItemRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItemRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -522,9 +666,9 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @Walk.started += instance.OnWalk;
                 @Walk.performed += instance.OnWalk;
                 @Walk.canceled += instance.OnWalk;
-                @Turn.started += instance.OnTurn;
-                @Turn.performed += instance.OnTurn;
-                @Turn.canceled += instance.OnTurn;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
                 @ActivateRightItem.started += instance.OnActivateRightItem;
                 @ActivateRightItem.performed += instance.OnActivateRightItem;
                 @ActivateRightItem.canceled += instance.OnActivateRightItem;
@@ -534,9 +678,9 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
-                @OpenDoor.started += instance.OnOpenDoor;
-                @OpenDoor.performed += instance.OnOpenDoor;
-                @OpenDoor.canceled += instance.OnOpenDoor;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
                 @FastGrabWaTa.started += instance.OnFastGrabWaTa;
                 @FastGrabWaTa.performed += instance.OnFastGrabWaTa;
                 @FastGrabWaTa.canceled += instance.OnFastGrabWaTa;
@@ -552,6 +696,18 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @DropItemLeft.started += instance.OnDropItemLeft;
+                @DropItemLeft.performed += instance.OnDropItemLeft;
+                @DropItemLeft.canceled += instance.OnDropItemLeft;
+                @DropItemRight.started += instance.OnDropItemRight;
+                @DropItemRight.performed += instance.OnDropItemRight;
+                @DropItemRight.canceled += instance.OnDropItemRight;
+                @SwitchItemLeft.started += instance.OnSwitchItemLeft;
+                @SwitchItemLeft.performed += instance.OnSwitchItemLeft;
+                @SwitchItemLeft.canceled += instance.OnSwitchItemLeft;
+                @SwitchItemRight.started += instance.OnSwitchItemRight;
+                @SwitchItemRight.performed += instance.OnSwitchItemRight;
+                @SwitchItemRight.canceled += instance.OnSwitchItemRight;
             }
         }
     }
@@ -592,16 +748,20 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnWalk(InputAction.CallbackContext context);
-        void OnTurn(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
         void OnActivateRightItem(InputAction.CallbackContext context);
         void OnActivateLeftItem(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
-        void OnOpenDoor(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
         void OnFastGrabWaTa(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnTakeItem(InputAction.CallbackContext context);
         void OnItemList(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnDropItemLeft(InputAction.CallbackContext context);
+        void OnDropItemRight(InputAction.CallbackContext context);
+        void OnSwitchItemLeft(InputAction.CallbackContext context);
+        void OnSwitchItemRight(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
