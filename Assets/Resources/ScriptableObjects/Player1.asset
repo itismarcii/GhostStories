@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfbca12a06805249974ea8ad133ef58, type: 3}
   m_Name: Player1
   m_EditorClassIdentifier: 
-  playerName: player
+  playerName: Player
   id: 420
   movement:
     sneakSpeed: 0

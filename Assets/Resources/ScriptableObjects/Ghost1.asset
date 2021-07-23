@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a21da518765651499a7f7ae290744db, type: 3}
   m_Name: Ghost1
   m_EditorClassIdentifier: 
-  name: 
+  ghost: 0
+  mode: 0
   movement:
     sneakSpeed: 0
     walkSpeed: 0
     runSpeed: 0
     crouchSpeed: 0
+    crouchHeight: 0
     turnSpeedX: 0
     turnSpeedY: 0
     stamina:
