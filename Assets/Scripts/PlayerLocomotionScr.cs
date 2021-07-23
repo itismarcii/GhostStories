@@ -42,12 +42,12 @@ public class PlayerLocomotionScr : MonoBehaviour
     //Item Parameter
     InventoryScr inventory;
     [Range(.1f, 5f)] public float actionRange = 10f;
-    [HideInInspector] public GameObject leftItem;
+    public GameObject leftItem;
     Item item_left;
-    [HideInInspector] public GameObject rightItem;
+    public GameObject rightItem;
     Item item_right;
-    [HideInInspector] public bool isRightItem = false;
-    [HideInInspector] public bool isLeftItem = false;
+    public bool isRightItem = false;
+    public bool isLeftItem = false;
 
 
     void Start()
@@ -187,7 +187,7 @@ public class PlayerLocomotionScr : MonoBehaviour
     {
         if (parent == locomotion.leftHand)
         {
-            Destroy(leftItem);
+            if (leftItem) { Destroy(leftItem); }
             leftItem = Instantiate(prefab, parent);
             leftItem.GetComponent<ItemScr>().item = item;
             item_left = item;
@@ -195,10 +195,12 @@ public class PlayerLocomotionScr : MonoBehaviour
             leftItem.GetComponent<Rigidbody>().isKinematic = true;
             inventory.AddInInventory(item);
             leftItem.transform.position = parent.position;
+            isLeftItem = true;
         }
-        else if(parent == locomotion.rightHand)
+
+        if (parent == locomotion.rightHand)
         {
-            Destroy(rightItem);
+            if(rightItem) { Destroy(rightItem); }
             rightItem = Instantiate(prefab, parent);
             rightItem.GetComponent<ItemScr>().item = item;
             item_right = item;
@@ -206,24 +208,27 @@ public class PlayerLocomotionScr : MonoBehaviour
             rightItem.GetComponent<Rigidbody>().isKinematic = true;
             inventory.AddInInventory(item);
             rightItem.transform.position = parent.position;
+            isRightItem = true;
         }
     }
+    
 
     public void SwitchItem(Transform hand)
     {
-        if(inventory.inventory.Count > 2)
+        if (inventory.inventory.Count != 0)
         {
             GameObject prefab = null;
             Item item = null;
-            foreach(Item i in inventory.inventory)
+            foreach (Item i in inventory.inventory)
             {
-                if(i != item_left && i != item_right)
+                if (i != item_left && i != item_right)
                 {
                     bool finished = false;
 
-                    foreach(GameObject pre in inventory.prefabs) {
-                        
-                        if(i.item == pre.GetComponent<ItemScr>().usage)
+                    foreach (GameObject pre in inventory.prefabs)
+                    {
+
+                        if (i.item == pre.GetComponent<ItemScr>().usage)
                         {
                             prefab = pre;
                             item = i;
@@ -232,12 +237,14 @@ public class PlayerLocomotionScr : MonoBehaviour
                             break;
                         }
                     }
-                    if(finished){ break; }
+                    if (finished) { break; }
                 }
             }
 
-            GenerateItem(prefab, item, hand);
-
+            if (prefab && item)
+            {
+                GenerateItem(prefab, item, hand);
+            }
         }
         
     }

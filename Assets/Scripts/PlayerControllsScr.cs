@@ -78,9 +78,6 @@ public class PlayerControllsScr : MonoBehaviour
         {
             if (leftActive) { HandleItemLeft(); } else { controlls.DeactivateItem(controlls.leftItem); }
         }
-
-        Debug.Log("left " + leftActive);
-        Debug.Log("right " + rightActive);
     }
 
     void Action()
@@ -111,10 +108,11 @@ public class PlayerControllsScr : MonoBehaviour
 
     void HandleItemLeft()
     {
-        if (!controlls.leftItem.GetComponent<ItemScr>().item.active && controlls.rightItem)
+        if (controlls.rightItem)
         {
-            if (controlls.leftItem.GetComponent<ItemScr>().item.refillableItem != Item.ItemUsage.none && controlls.rightItem)
+            if (controlls.leftItem.GetComponent<ItemScr>().item.refillableItem != Item.ItemUsage.none && !controlls.rightItem.GetComponent<ItemScr>().item.active)
             {
+                
                 controlls.leftItem.GetComponent<ItemScr>().ActivateItem(controlls.rightItem.GetComponent<ItemScr>().item);
             }
             {
@@ -125,9 +123,9 @@ public class PlayerControllsScr : MonoBehaviour
 
     void HandleItemRight()
     {
-        if (!controlls.rightItem.GetComponent<ItemScr>().item.active && controlls.leftItem)
+        if (controlls.leftItem)
         {
-            if (controlls.rightItem.GetComponent<ItemScr>().item.refillableItem != Item.ItemUsage.none && controlls.leftItem)
+            if (controlls.rightItem.GetComponent<ItemScr>().item.refillableItem != Item.ItemUsage.none && !controlls.leftItem.GetComponent<ItemScr>().item.active)
             {
                 controlls.rightItem.GetComponent<ItemScr>().ActivateItem(controlls.leftItem.GetComponent<ItemScr>().item);
             }
@@ -140,35 +138,37 @@ public class PlayerControllsScr : MonoBehaviour
 
     void DropLeft()
     {
-        if (controlls.isLeftItem) 
+        if (controlls.isLeftItem)
         {
+            leftActive = false;
+            controlls.DeactivateItem(controlls.leftItem);
             controlls.DropItem(controlls.locomotion.leftHand, controlls.leftItem);
-            controlls.isLeftItem = false; 
+            controlls.isLeftItem = false;
+            controlls.leftItem = null;
         }
-
-        leftActive = false;
     }
 
     void DropRight()
     {
         if (controlls.isRightItem)
         {
+            rightActive = false;
+            controlls.DeactivateItem(controlls.rightItem);
             controlls.DropItem(controlls.locomotion.rightHand, controlls.rightItem);
             controlls.isRightItem = false;
+            controlls.rightItem = null;
         }
-
-        rightActive = false;
     }
 
     void SwitchLeft()
     {
-        controlls.DeactivateItem(controlls.leftItem);
+        if(controlls.leftItem) { controlls.DeactivateItem(controlls.leftItem); }
         controlls.SwitchItem(controlls.locomotion.leftHand);
     }
 
     void SwitchRight()
     {
-        controlls.DeactivateItem(controlls.rightItem);
+        if(controlls.rightItem) { controlls.DeactivateItem(controlls.rightItem); }
         controlls.SwitchItem(controlls.locomotion.rightHand);
     }
 }

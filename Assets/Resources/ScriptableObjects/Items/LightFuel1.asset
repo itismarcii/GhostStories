@@ -21,5 +21,5 @@ MonoBehaviour:
   durability:
     maxAmount: 100
     amount: 100
-    loseTime: 0.1
+    loseTime: 0.2
     loseAmount: 2
