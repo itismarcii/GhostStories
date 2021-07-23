@@ -42,12 +42,12 @@ public class PlayerLocomotionScr : MonoBehaviour
     //Item Parameter
     InventoryScr inventory;
     [Range(.1f, 5f)] public float actionRange = 10f;
-    public GameObject leftItem;
+    [HideInInspector] public GameObject leftItem;
     Item item_left;
-    public GameObject rightItem;
+    [HideInInspector] public GameObject rightItem;
     Item item_right;
-    public bool isRightItem = false;
-    public bool isLeftItem = false;
+    [HideInInspector] public bool isRightItem = false;
+    [HideInInspector] public bool isLeftItem = false;
 
 
     void Start()
