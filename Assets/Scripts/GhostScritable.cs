@@ -37,5 +37,5 @@ public class GhostScritable : ScriptableObject
     public Sanity sanity;
     public Mode mode;
     public Abilities abilities;
-    [HideInInspector] public Movement movement;
+    public Movement movement;
 }
