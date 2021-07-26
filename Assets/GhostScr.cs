@@ -7,13 +7,18 @@ using UnityEngine.AI;
 public class GhostScr : MonoBehaviour
 {
     #region - Parameters -
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     
 
     public GhostScritable ghost;
+    public GameObject followThis;
     public GameObject[] patrollpoints;
 
     Vector3 destination;
+
+    bool isPatrollDelayRunning = false;
+    public float patrollDelay = 1f;
+
     #endregion
 
     void Start()
@@ -42,14 +47,19 @@ public class GhostScr : MonoBehaviour
 
     public void Patrol()
     {
-        int rng = Random.Range(0, patrollpoints.Length);
-        agent.SetDestination(patrollpoints[rng].transform.position);
-        destination = patrollpoints[rng].transform.position;
+        if (Mathf.Abs(Vector3.Distance(destination, transform.position)) <= agent.stoppingDistance + .5f)
+        {
+            int rng = Random.Range(0, patrollpoints.Length);
+            agent.SetDestination(patrollpoints[rng].transform.position);
+            destination = patrollpoints[rng].transform.position;
+            followThis = null; 
+        }
     }
 
     //Follows Player  ---> TODO: Maybe a decay
     public void Follow(Transform obj)
     {
         agent.SetDestination(obj.position);
+        destination = obj.transform.position;
     }
 }

@@ -6,10 +6,10 @@ using UnityEngine;
 public class GhostModeScr : MonoBehaviour
 {
     GhostScr ghostScr;
-    GameObject[] players;
+    public GameObject[] players;
 
-    public int maxSanityAmout;          //Maybe set over Ghost Scriptable
-
+    public int minSanityAmount;          //Maybe set over Ghost Scriptable
+    public int encounterDistance;
     int frames = 0;
 
     private void Start()
@@ -22,7 +22,8 @@ public class GhostModeScr : MonoBehaviour
     private void Update()
     { 
         //Check the Sanity for each Player after a certain amount of frames
-        if (frames % 100 == 0) { CheckPlayersSanity(); }  
+        if (frames % 200 == 0) { CheckPlayersSanity(); }  
+        if (frames % 25 == 0) { PlayerNearby(); }
 
         switch(ghostScr.ghost.mode)
         {
@@ -46,7 +47,7 @@ public class GhostModeScr : MonoBehaviour
 
             var ply = p.GetComponent<PlayerLocomotionScr>().player;
 
-            if (ply.sanity >= maxSanityAmout)
+            if (ply.sanity <= minSanityAmount)
             {
                 ghostScr.ghost.mode = GhostScritable.Mode.aggressive;
                 player.Add(p);
@@ -55,7 +56,29 @@ public class GhostModeScr : MonoBehaviour
 
         if (ghostScr.ghost.mode == GhostScritable.Mode.aggressive)
         {
-            ghostScr.Follow(player[Random.Range(0, player.Count)].transform);
+            var thisP = player[Random.Range(0, player.Count)];
+            ghostScr.Follow(thisP.transform);
+            ghostScr.followThis = thisP;
+        }
+    }
+
+    void PlayerNearby()
+    {
+        if (!ghostScr.followThis)
+        {
+            foreach (GameObject p in players)
+            {
+                if (Mathf.Abs(Vector3.Distance(p.transform.position, transform.position)) <= encounterDistance)
+                {
+                    ghostScr.Follow(p.transform);
+                    ghostScr.followThis = p;
+                    break;
+                }
+                else
+                {
+                    ghostScr.followThis = null;
+                }
+            }
         }
     }
 }

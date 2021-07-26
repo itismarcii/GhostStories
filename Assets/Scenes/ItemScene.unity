@@ -1454,10 +1454,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5592221375652631029, guid: a2b65ec85519baa4da50fd06fce58e06, type: 3}
-      propertyPath: locomotion.groundMask.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2b65ec85519baa4da50fd06fce58e06, type: 3}
 --- !u!1001 &7319710541416529997
