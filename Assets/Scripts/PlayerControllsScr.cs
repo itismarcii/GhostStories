@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerLocomotionScr))]
 public class PlayerControllsScr : MonoBehaviour
 {
     PlayerLocomotionScr controlls;
@@ -85,13 +86,20 @@ public class PlayerControllsScr : MonoBehaviour
         RaycastHit hit;
         var ray = controlls.locomotion.playerCam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, controlls.actionRange, 1 << 8))
+        if (Physics.Raycast(ray, out hit, controlls.actionRange
+            //,1 << 8
+            ))
         {
             var selection = hit.transform;
 
-            if (selection.transform.tag == "Item")
+            switch (selection.transform.tag)
             {
-                controlls.GrabItem(selection);
+                case "Item":
+                    controlls.GrabItem(selection);
+                    break;
+                case "Door":
+                    selection.GetComponentInParent<DoorControllScr>().DoorHandling();
+                    break;
             }
         }
     }

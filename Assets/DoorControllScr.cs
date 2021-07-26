@@ -10,10 +10,14 @@ public class DoorControllScr : MonoBehaviour
 
     Animator animator;
     AnimationClip[] clips;
-    float animationDuration = 0;
+    float animationDurationOpen = 0;
+    bool isDoorOpen = false;
 
     //Coroutine
     bool AMDelay = false;
+
+    //Event
+    bool animationGoing = false;
 
     #endregion
 
@@ -27,7 +31,7 @@ public class DoorControllScr : MonoBehaviour
         {
             if (c.name == "DoorOpen")
             {
-                animationDuration = c.length;
+                animationDurationOpen = c.length;
                 break;
             }
         }
@@ -48,23 +52,74 @@ public class DoorControllScr : MonoBehaviour
         switch (other.transform.tag)
         {
             case "Ghost":
-                CloseDoor();
+                //Add Ghost Choice if it wants to close the door
+                //CloseDoor();
                 break;
+        }
+    }
+
+    public void DoorHandling()
+    {
+        if (!animationGoing)
+        {
+            switch (isDoorOpen)
+            {
+                case true:
+                    CloseDoor();
+                    break;
+                case false:
+                    OpenDoor();
+                    break;
+            }
+        }
+    }
+
+    void OpenDoor()
+    {
+        if (!isDoorOpen)
+        {
+            animator.SetTrigger("Open");
         }
     }
 
     void OpenDoor(GameObject obj)
     {
-        var agent = obj.GetComponent<NavMeshAgent>();
-        agent.isStopped = true; 
-        animator.SetTrigger("Open");
-        StartCoroutine(AgentMovementDelay_(agent, animationDuration));
+        if (!isDoorOpen)
+        {
+            var agent = obj.GetComponent<NavMeshAgent>();
+            agent.isStopped = true;
+            animator.SetTrigger("Open");
+            StartCoroutine(AgentMovementDelay_(agent, animationDurationOpen));
+        }
     }
 
     void CloseDoor()
     {
-        animator.SetTrigger("Close");
+        if (isDoorOpen)
+        {
+            animator.SetTrigger("Close");
+        }
     }
+    public void DoorBool(int isBool)
+    {
+        switch (isBool)
+        {
+            case 0:
+                isDoorOpen = false;
+                break;
+            case 1:
+                isDoorOpen = true;
+                break;
+        }
+
+        animationGoing = false;
+    }
+
+    public void AnimationStartDoor()
+    {
+        animationGoing = true;
+    }
+
     IEnumerator AgentMovementDelay_(NavMeshAgent agent, float duration)
     {
         if(AMDelay) { yield break; }

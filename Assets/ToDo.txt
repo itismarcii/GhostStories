@@ -62,7 +62,7 @@
 ####################################################			#######################################################
 
 	Left Stick - Walk											
-	Right Stick - Turn											
+	Right Stick - Rotate											
 	R1 - Activate Right Item / Drop Right Item					
 	R2 - Run
 	L1 - Activate Left Item / Drop Left Item

@@ -196,4 +196,18 @@ AnimationClip:
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: AnimationStartDoor
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 1c36ff07adf340b409904eff2a03741a, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: DoorBool
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 1c36ff07adf340b409904eff2a03741a, type: 3}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
