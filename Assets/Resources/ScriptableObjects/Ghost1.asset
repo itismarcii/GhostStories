@@ -16,7 +16,7 @@ MonoBehaviour:
   mode: 0
   movement:
     sneakSpeed: 0
-    walkSpeed: 0
+    walkSpeed: 4
     runSpeed: 0
     crouchSpeed: 0
     crouchHeight: 0

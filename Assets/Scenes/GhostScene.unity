@@ -12454,9 +12454,10 @@ GameObject:
   - component: {fileID: 2024263958}
   - component: {fileID: 2024263957}
   - component: {fileID: 2024263956}
+  - component: {fileID: 2024263960}
   - component: {fileID: 2024263955}
   - component: {fileID: 2024263954}
-  - component: {fileID: 2024263960}
+  - component: {fileID: 2024263961}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Ghost
@@ -12476,7 +12477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c269309cc364e46815ec3ac92a9d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 0}
+  ghost: {fileID: 11400000, guid: bb93cdb559ca48140a69bf11ff8d0756, type: 2}
   patrollpoints:
   - {fileID: 1540207862}
   - {fileID: 113784524}
@@ -12596,6 +12597,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2024263961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024263953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaec49d6c77440f45b5a9d83361f48ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
 --- !u!1 &2045226903
 GameObject:
   m_ObjectHideFlags: 0

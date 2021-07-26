@@ -38,11 +38,18 @@ public class GhostScr : MonoBehaviour
                 agent.SetDestination(hit.point);
             }
         }
+    }
 
-        if(Mathf.Abs(Vector3.Distance(destination, transform.position)) <= 3) {
-            int rng = Random.Range(0, patrollpoints.Length);
-            agent.SetDestination(patrollpoints[rng].transform.position);
-            destination = patrollpoints[rng].transform.position;
-        }
+    public void Patrol()
+    {
+        int rng = Random.Range(0, patrollpoints.Length);
+        agent.SetDestination(patrollpoints[rng].transform.position);
+        destination = patrollpoints[rng].transform.position;
+    }
+
+    //Follows Player  ---> TODO: Maybe a decay
+    public void Follow(Transform obj)
+    {
+        agent.SetDestination(obj.position);
     }
 }
