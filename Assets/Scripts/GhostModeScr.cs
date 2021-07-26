@@ -40,7 +40,7 @@ public class GhostModeScr : MonoBehaviour
     // Checks Players Sanitylevel and follows one random if "> 0" have a too high Sanity
     void CheckPlayersSanity()
     {
-        List<GameObject> player = new();
+        List<GameObject> player = new List<GameObject>();
 
         foreach(GameObject p in players) {
 
