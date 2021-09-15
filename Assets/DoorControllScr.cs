@@ -10,8 +10,14 @@ public class DoorControllScr : MonoBehaviour
 
     Animator animator;
     AnimationClip[] clips;
-    float animationDurationOpen = 0;
+    Dictionary<string, float> durationLists;
     bool isDoorOpen = false;
+
+    [Space]
+
+    public int openAnimationCount;
+    public int closeAnimationCount;
+
 
     //Coroutine
     bool AMDelay = false;
@@ -25,14 +31,18 @@ public class DoorControllScr : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         clips = animator.runtimeAnimatorController.animationClips;
+        durationLists = new Dictionary<string, float>();
 
         //Sets duration for OpenDoor animation
         foreach (AnimationClip c in clips)
         {
             if (c.name == "DoorOpen")
             {
-                animationDurationOpen = c.length;
-                break;
+                durationLists.Add("DoorOpen", c.length);
+            }
+            if (c.name == "DoorOpenSlow")
+            {
+                durationLists.Add("DoorOpenSlow", c.length);
             }
         }
     }
@@ -42,7 +52,8 @@ public class DoorControllScr : MonoBehaviour
         switch (other.transform.tag)
         {
             case "Ghost":
-                OpenDoor(other.gameObject);
+                int rngNum = Random.Range(0, durationLists.Count);
+                OpenDoor(other.gameObject, rngNum);
                 break;
         }
     }
@@ -82,15 +93,30 @@ public class DoorControllScr : MonoBehaviour
         }
     }
 
-    void OpenDoor(GameObject obj)
+    void OpenDoor(GameObject obj, int animationNumber)
     {
+
         if (!isDoorOpen)
         {
             var agent = obj.GetComponent<NavMeshAgent>();
             agent.isStopped = true;
+            animator.SetInteger("Random", animationNumber);
             animator.SetTrigger("Open");
-            StartCoroutine(AgentMovementDelay_(agent, animationDurationOpen));
+            float duration = SelectAnimationOpenDoor(animationNumber);
+            StartCoroutine(AgentMovementDelay_(agent, duration));
         }
+    }
+
+    float SelectAnimationOpenDoor(int animationNumber)
+    {
+        switch(animationNumber)
+        {
+            case 0:
+                return durationLists["DoorOpen"];
+            case 1:
+                return durationLists["DoorOpenSlow"];
+        }
+        return 0;
     }
 
     void CloseDoor()

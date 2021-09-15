@@ -2200,6 +2200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c36ff07adf340b409904eff2a03741a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openAnimationCount: 3
+  closeAnimationCount: 1
 --- !u!95 &1133428060
 Animator:
   serializedVersion: 3
@@ -13089,11 +13091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5592221375652631024, guid: a2b65ec85519baa4da50fd06fce58e06, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.21
+      value: -41.69
       objectReference: {fileID: 0}
     - target: {fileID: 5592221375652631024, guid: a2b65ec85519baa4da50fd06fce58e06, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.94
+      value: -9.15
       objectReference: {fileID: 0}
     - target: {fileID: 5592221375652631024, guid: a2b65ec85519baa4da50fd06fce58e06, type: 3}
       propertyPath: m_LocalPosition.z
