@@ -204,7 +204,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 2.9166667
+  - time: 2.8333333
     functionName: DoorBool
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 1c36ff07adf340b409904eff2a03741a, type: 3}

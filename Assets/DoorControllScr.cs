@@ -11,19 +11,15 @@ public class DoorControllScr : MonoBehaviour
     Animator animator;
     AnimationClip[] clips;
     Dictionary<string, float> durationLists;
-    bool isDoorOpen = false;
+    public bool isDoorOpen = false;
 
     [Space]
-
-    public int openAnimationCount;
-    public int closeAnimationCount;
-
 
     //Coroutine
     bool AMDelay = false;
 
     //Event
-    bool animationGoing = false;
+    public bool animationGoing = false;
 
     #endregion
 
@@ -45,6 +41,8 @@ public class DoorControllScr : MonoBehaviour
                 durationLists.Add("DoorOpenSlow", c.length);
             }
         }
+
+        animator.SetBool("Close", true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,15 +71,7 @@ public class DoorControllScr : MonoBehaviour
     {
         if (!animationGoing)
         {
-            switch (isDoorOpen)
-            {
-                case true:
-                    CloseDoor();
-                    break;
-                case false:
-                    OpenDoor();
-                    break;
-            }
+            if (isDoorOpen) { CloseDoor(); } else { OpenDoor(); }
         }
     }
 
@@ -89,7 +79,8 @@ public class DoorControllScr : MonoBehaviour
     {
         if (!isDoorOpen)
         {
-            animator.SetTrigger("Open");
+            animator.SetBool("Open", true);
+            animator.SetBool("Close", false);
         }
     }
 
@@ -101,7 +92,8 @@ public class DoorControllScr : MonoBehaviour
             var agent = obj.GetComponent<NavMeshAgent>();
             agent.isStopped = true;
             animator.SetInteger("Random", animationNumber);
-            animator.SetTrigger("Open");
+            animator.SetBool("Open", true);
+            animator.SetBool("Close", false);
             float duration = SelectAnimationOpenDoor(animationNumber);
             StartCoroutine(AgentMovementDelay_(agent, duration));
         }
@@ -123,7 +115,8 @@ public class DoorControllScr : MonoBehaviour
     {
         if (isDoorOpen)
         {
-            animator.SetTrigger("Close");
+            animator.SetBool("Open", false);
+            animator.SetBool("Close", true);
         }
     }
     public void DoorBool(int isBool)
